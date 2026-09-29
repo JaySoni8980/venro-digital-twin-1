@@ -75,6 +75,43 @@ st.markdown("""
     div[data-testid="stMetricLabel"] p {
         color: #94a3b8 !important;
     }
+
+    /* 8. Custom HTML Form Styling for Contact Us */
+    .custom-form input, .custom-form textarea, .custom-form select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        background-color: #020617;
+        border: 1px solid #334155;
+        color: #f8fafc;
+        font-family: inherit;
+    }
+    .custom-form button {
+        background-color: #059669;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        font-weight: bold;
+        transition: background-color 0.2s;
+    }
+    .custom-form button:hover {
+        background-color: #10b981;
+    }
+    
+    /* 9. Poster Image Hover Effect */
+    .poster-link img {
+        transition: transform 0.2s, box-shadow 0.2s;
+        border-radius: 12px;
+        border: 1px solid #334155;
+    }
+    .poster-link img:hover {
+        transform: scale(1.01);
+        box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -138,21 +175,91 @@ with header_col2:
 st.markdown("<hr style='border: none; border-top: 1px solid #1e293b; margin: 15px 0 25px 0;'>", unsafe_allow_html=True)
 
 # ==========================================
-# TABS INTERFACE
+# TABS INTERFACE (Reordered as requested)
 # ==========================================
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+tab_home, tab_contact, tab_ai, tab_arch, tab_3d, tab_svd, tab_tea = st.tabs([
+    "🏠 Home & Poster",
+    "📞 Contact Us", 
     "💬 ScrubAI Advisor", 
     "⚙️ Auto-Architect", 
     "🔬 3D Transport", 
     "📊 SVD Scale Engine", 
-    "💰 Techno-Economics",
-    "📞 Contact Us"
+    "💰 Techno-Economics"
 ])
 
 # ------------------------------------------
-# TAB 1: ScrubAI Advisor
+# TAB 1: Home & Poster
 # ------------------------------------------
-with tab1:
+with tab_home:
+    home_c1, home_c2 = st.columns([1, 1])
+    
+    with home_c1:
+        st.markdown("### Welcome to AVENRO")
+        st.markdown("""
+        Developed by Jay Soni, the ReActScrub digital twin represents the transition from static flowsheet simulation to transport-coupled reactive architectures. 
+        
+        Featured at the **FAMMTP 2026 Symposium at IIT Madras**, this framework utilizes Singular Value Decomposition (SVD) to scale gas-liquid mass transfer physics. By isolating dominant transport modes, we can dynamically synthesize multi-stage circular treatment modules for highly complex industrial exhaust lines.
+        
+        Navigate through the tabs to test live parameter adjustments, visualize 3D molecular transport, and calculate dual-currency techno-economics for custom emission profiles.
+        """)
+        
+    with home_c2:
+        st.markdown("### FAMMTP 2026 Pitch Poster")
+        # Ensure your poster image file is named "poster.jpg" (or change the src below) and is placed in your GitHub repository folder.
+        st.markdown("""
+        <a href="poster.jpg" target="_blank" class="poster-link">
+            <img src="https://via.placeholder.com/800x450/0f172a/10b981?text=Click+Here+To+View+High-Res+FAMMTP+Poster" alt="FAMMTP 2026 Poster" style="width: 100%;">
+        </a>
+        <p style="text-align: center; font-size: 0.8rem; color: #94a3b8; margin-top: 8px;">Click the image to expand the full resolution poster.</p>
+        """, unsafe_allow_html=True)
+
+# ------------------------------------------
+# TAB 2: Contact Us (Functional Email Form)
+# ------------------------------------------
+with tab_contact:
+    st.markdown("### 📞 Partner with AVENRO")
+    st.markdown("We are scaling toward our **2028 industrial validation milestone (0.1 to 1,000 m³/h physical slipstream pilot)** to calibrate our SVD framework against live industrial flue gases.")
+    
+    col_cform, col_cinfo = st.columns(2)
+    with col_cform:
+        # REPLACE 'YOUR_EMAIL_HERE@example.com' with your actual receiving email address.
+        # The first time you submit, FormSubmit will ask you to verify your email.
+        st.markdown("""
+        <form action="https://formsubmit.co/jaysoni82007@gmail.com" method="POST" class="custom-form">
+            <!-- Disables CAPTCHA to keep the UI clean inside Streamlit -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New AVENRO Partnership Inquiry!">
+            
+            <input type="text" name="name" placeholder="Name / Title" required>
+            <input type="text" name="organization" placeholder="Company / Institution" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <select name="category">
+                <option value="Industrial Site Testing">Industrial Site Testing</option>
+                <option value="Technical Mentorship">Technical Mentorship</option>
+                <option value="Seed / Pilot Capital">Seed / Pilot Capital</option>
+                <option value="General Inquiry">General Inquiry</option>
+            </select>
+            <textarea name="message" rows="4" placeholder="Message / Exhaust Parameters" required></textarea>
+            <button type="submit">Submit Deployment Inquiry</button>
+        </form>
+        """, unsafe_allow_html=True)
+
+    with col_cinfo:
+        st.markdown("""
+            <div style="background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 22px;">
+                <h4 style="margin-top: 0; color: #10b981 !important;">AVENRO Engineering Group</h4>
+                <p style="font-size: 0.85rem; color: #94a3b8;">Reaction Engineering & Transport Phenomena Innovations</p>
+                <hr style="border: none; border-top: 1px solid #1e293b; margin: 12px 0;">
+                <p style="font-size: 0.85rem; margin: 6px 0;"><strong>Architect:</strong> Jay Soni</p>
+                <p style="font-size: 0.85rem; margin: 6px 0;"><strong>Venture Focus:</strong> Hardware-as-a-Service (HaaS)</p>
+                <p style="font-size: 0.85rem; margin: 6px 0;"><strong>Active Symposia:</strong> IIT Madras FAMMTP 2026</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+# ------------------------------------------
+# TAB 3: ScrubAI Advisor
+# ------------------------------------------
+with tab_ai:
     col_preset, col_chat = st.columns([1, 2])
     
     with col_preset:
@@ -202,9 +309,9 @@ with tab1:
             st.rerun()
 
 # ------------------------------------------
-# TAB 2: Flue Gas Auto-Architect
+# TAB 4: Flue Gas Auto-Architect
 # ------------------------------------------
-with tab2:
+with tab_arch:
     col_in, col_arch = st.columns([1, 2])
     
     with col_in:
@@ -269,9 +376,9 @@ with tab2:
             """, unsafe_allow_html=True)
 
 # ------------------------------------------
-# TAB 3: 3D Transport Simulation
+# TAB 5: 3D Transport Simulation
 # ------------------------------------------
-with tab3:
+with tab_3d:
     col_t_ctrl, col_t_vis = st.columns([1, 3])
     with col_t_ctrl:
         st.markdown("### 🎛️ Hydrodynamics")
@@ -332,9 +439,9 @@ with tab3:
         st.plotly_chart(fig_3d, use_container_width=True)
 
 # ------------------------------------------
-# TAB 4: SVD Scale Engine
+# TAB 6: SVD Scale Engine
 # ------------------------------------------
-with tab4:
+with tab_svd:
     st.markdown("### 🔬 Multivariate Singular Value Decomposition ($A = U \Sigma V^T$)")
     st.caption("Dimensionality reduction maps 8 dimensionless parameters ($Re, Sc, Sh, Da, Ha, k_La, \\Delta P, \\eta$) into 2 dominant invariant operational modes.")
 
@@ -377,9 +484,9 @@ with tab4:
         st.plotly_chart(fig_loading, use_container_width=True)
 
 # ------------------------------------------
-# TAB 5: Techno-Economics
+# TAB 7: Techno-Economics
 # ------------------------------------------
-with tab5:
+with tab_tea:
     tea_col_ctrl, tea_col_kpi = st.columns([1, 2])
     with tea_col_ctrl:
         st.markdown("### 💰 Financial Model")
@@ -418,34 +525,3 @@ with tab5:
             margin=dict(t=40, b=20, l=40, r=20)
         )
         st.plotly_chart(fig_tea_comp, use_container_width=True)
-
-# ------------------------------------------
-# TAB 6: Contact Us
-# ------------------------------------------
-with tab6:
-    st.markdown("### 📞 Partner with AVENRO")
-    st.markdown("We are scaling toward our **2028 industrial validation milestone (0.1 to 1,000 m³/h physical slipstream pilot)** to calibrate our SVD framework against live industrial flue gases.")
-    
-    col_cform, col_cinfo = st.columns(2)
-    with col_cform:
-        with st.form("contact_inquiry"):
-            name = st.text_input("Name / Title")
-            organization = st.text_input("Company / Institution")
-            email = st.text_input("Email")
-            category = st.selectbox("Collaboration Scope", ["Industrial Site Testing", "Technical Mentorship", "Seed / Pilot Capital", "General Inquiry"])
-            msg = st.text_area("Message / Exhaust Parameters")
-            submitted = st.form_submit_button("Submit Deployment Inquiry")
-            if submitted:
-                st.success("Inquiry transmitted. The AVENRO engineering team will review your specifications.")
-
-    with col_cinfo:
-        st.markdown("""
-            <div style="background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 22px;">
-                <h4 style="margin-top: 0; color: #10b981 !important;">AVENRO Engineering Group</h4>
-                <p style="font-size: 0.85rem; color: #94a3b8;">Reaction Engineering & Transport Phenomena Innovations</p>
-                <hr style="border: none; border-top: 1px solid #1e293b; margin: 12px 0;">
-                <p style="font-size: 0.85rem; margin: 6px 0;"><strong>Venture Focus:</strong> Hardware-as-a-Service (HaaS)</p>
-                <p style="font-size: 0.85rem; margin: 6px 0;"><strong>Active Symposia:</strong> IIT Madras FAMMTP 2026</p>
-                <p style="font-size: 0.85rem; margin: 6px 0;"><strong>Inquiries:</strong> partnerships@avenro-tech.com</p>
-            </div>
-        """, unsafe_allow_html=True)
